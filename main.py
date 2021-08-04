@@ -1,8 +1,9 @@
-import numpy as np
-import random
-import pygame
-import sys
 import math
+import random
+import sys
+
+import numpy as np
+import pygame
 
 BLUE = (0, 0, 255)
 BLACK = (0, 0, 0)
@@ -20,6 +21,7 @@ PLAYER_PIECE = 1
 AI_PIECE = 2
 
 WINDOW_LENGTH = 4
+
 
 def get_next_open_row(board, col):
     for r in range(ROW_COUNT):
@@ -59,7 +61,8 @@ def winning_move(board, piece):
 
 def minimax(board, depth, alpha, beta, maximizingPlayer):
     valid_locations = get_valid_locations(board)
-    is_terminal = winning_move(board, PLAYER_PIECE) or winning_move(board, AI_PIECE) or len(get_valid_locations(board)) == 0
+    is_terminal = winning_move(board, PLAYER_PIECE) or winning_move(board, AI_PIECE) or len(
+        get_valid_locations(board)) == 0
     if depth == 0 or is_terminal:
         if is_terminal:
             if winning_move(board, AI_PIECE):
@@ -292,16 +295,16 @@ def draw_board(board):
         for r in range(ROW_COUNT):
             pygame.draw.rect(screen, BLUE, (c * SQUARESIZE, r * SQUARESIZE + SQUARESIZE, SQUARESIZE, SQUARESIZE))
             pygame.draw.circle(screen, BLACK, (
-            int(c * SQUARESIZE + SQUARESIZE / 2), int(r * SQUARESIZE + SQUARESIZE + SQUARESIZE / 2)), RADIUS)
+                int(c * SQUARESIZE + SQUARESIZE / 2), int(r * SQUARESIZE + SQUARESIZE + SQUARESIZE / 2)), RADIUS)
 
     for c in range(COLUMN_COUNT):
         for r in range(ROW_COUNT):
             if board[r][c] == PLAYER_PIECE:
                 pygame.draw.circle(screen, RED, (
-                int(c * SQUARESIZE + SQUARESIZE / 2), height - int(r * SQUARESIZE + SQUARESIZE / 2)), RADIUS)
+                    int(c * SQUARESIZE + SQUARESIZE / 2), height - int(r * SQUARESIZE + SQUARESIZE / 2)), RADIUS)
             elif board[r][c] == AI_PIECE:
                 pygame.draw.circle(screen, YELLOW, (
-                int(c * SQUARESIZE + SQUARESIZE / 2), height - int(r * SQUARESIZE + SQUARESIZE / 2)), RADIUS)
+                    int(c * SQUARESIZE + SQUARESIZE / 2), height - int(r * SQUARESIZE + SQUARESIZE / 2)), RADIUS)
     pygame.display.update()
 
 
@@ -377,7 +380,7 @@ while not game_over:
                 screen.blit(label, (40, 10))
                 game_over = True
 
-            #print_board(board)
+            # print_board(board)
             print(np.flip(board, 0))
             draw_board(board)
 
